@@ -2,6 +2,7 @@
 
 ## 1.1.0 — 2026-09-23
 
+- User guide at `docs/guide.md`; website at https://fore.si.
 - Bundles the read-only foresight.agt MCP server (`.mcp.json` → `https://fore.si/mcp`), and the skill uses it as extra evidence.
 - The manifest input now advertises the mcp endpoint.
 

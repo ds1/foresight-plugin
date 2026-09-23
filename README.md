@@ -2,6 +2,8 @@
 
 Strategic futures thinking and content production inside Claude Code. Foresight turns Claude into a rigorous foresight analyst grounded in IFTF methodology, Stanford's Playbook for Strategic Foresight, and structured analytic techniques. It scans for signals of change, builds divergent scenarios, writes evidence-based forecasts and artifacts from the future, pressure-tests strategies, and backcasts roadmaps, backed by a signal database that grows across sessions.
 
+**Website: [fore.si](https://fore.si)**. **Full guide: [docs/guide.md](docs/guide.md)**
+
 The plugin is published as the agent **`foresight.agt`** on AGT Registry v2 (Polygon). Its manifest is signed by the name's on-chain owner and points back to this repository.
 
 ## Install
