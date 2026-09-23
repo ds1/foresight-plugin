@@ -1,7 +1,7 @@
 {
   "$comment": "Input for agtnames/agt-site scripts/publish-manifest.mjs (owner 0x7f4a...7566). name/owner/updated/agt/signature are filled in by the script, which also drops any key it does not know. The mcp endpoint is the read-only signal-database server deployed from foresight-md (api/mcp.js).",
   "description": "A strategic foresight agent. Scans signals of change and clusters them into drivers, builds genuinely divergent scenarios, writes evidence-based forecasts and artifacts from the future, maps cascading implications, pressure-tests strategies, and backcasts roadmaps, all grounded in a persistent, cited signal database. Install it in Claude Code from github.com/ds1/foresight-plugin; published analysis at foresight.domains/insights.",
-  "website": "https://github.com/ds1/foresight-plugin",
+  "website": "https://fore.si",
   "icon": "https://agtnames.com/api/badge/foresight.svg",
   "endpoints": [
     {
