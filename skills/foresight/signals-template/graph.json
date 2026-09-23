@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "drivers": {},
+  "connections": [],
+  "metadata": {
+    "created": "YYYY-MM-DD",
+    "last_updated": "YYYY-MM-DD",
+    "total_drivers": 0,
+    "total_connections": 0
+  }
+}

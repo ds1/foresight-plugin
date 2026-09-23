@@ -1,0 +1,23 @@
+{
+  "name": "foresight",
+  "owner": {
+    "name": "ds1",
+    "url": "https://github.com/ds1"
+  },
+  "metadata": {
+    "description": "Strategic foresight for Claude Code: signal scans, scenarios, forecasts and artifacts from the future, backed by a persistent signal database. Published as foresight.agt."
+  },
+  "plugins": [
+    {
+      "name": "foresight",
+      "source": "./",
+      "description": "Strategic futures thinking and content production. Nine modes (Signal Scan, Scenario, Forecast, Artifact, Implications, Challenge, Backcast, Investment Memo, Historical Pattern), six interaction styles including a plain-language guide for newcomers and a headless style for automation, and a persistent signal database with automated pattern detection and a visual dashboard. Grounded in IFTF, Stanford d.school and structured analytic technique methodology.",
+      "homepage": "https://github.com/ds1/foresight-plugin",
+      "repository": "https://github.com/ds1/foresight-plugin",
+      "license": "MIT",
+      "keywords": ["foresight", "futures", "scenarios", "forecasting", "signals", "strategy", "agt"],
+      "category": "productivity",
+      "displayName": "Foresight"
+    }
+  ]
+}

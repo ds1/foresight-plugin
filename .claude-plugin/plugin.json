@@ -1,0 +1,21 @@
+{
+  "name": "foresight",
+  "version": "1.1.0",
+  "description": "Strategic futures thinking and content production: signal scans, divergent scenarios, evidence-based forecasts, artifacts from the future, implications, assumption challenges, backcasts, investment memos and historical patterns, with a persistent signal database and dashboard. Bundles the read-only foresight.agt MCP server (the published signal database). Published as foresight.agt.",
+  "author": {
+    "name": "ds1",
+    "url": "https://github.com/ds1"
+  },
+  "homepage": "https://github.com/ds1/foresight-plugin",
+  "repository": "https://github.com/ds1/foresight-plugin",
+  "license": "MIT",
+  "keywords": [
+    "foresight",
+    "futures",
+    "scenarios",
+    "forecasting",
+    "signals",
+    "strategy",
+    "agt"
+  ]
+}

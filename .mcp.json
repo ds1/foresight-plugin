@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "foresight": {
+      "type": "http",
+      "url": "https://fore.si/mcp"
+    }
+  }
+}

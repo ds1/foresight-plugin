@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "generated": "YYYY-MM-DD",
+  "clusters": [],
+  "convergences": [],
+  "accelerations": [],
+  "contradictions": [],
+  "emergences": [],
+  "decays": [],
+  "gaps": [],
+  "metadata": {
+    "last_analysis": "YYYY-MM-DD",
+    "signals_analyzed": 0,
+    "patterns_found": 0
+  }
+}
