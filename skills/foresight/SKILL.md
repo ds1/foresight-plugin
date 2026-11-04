@@ -239,8 +239,8 @@ This skill is published as the agent **`foresight.agt`** on AGT Registry v2 (Pol
 
 ### The published signal database (`foresight` MCP server)
 
-This plugin also connects the read-only `foresight` MCP server at `https://fore.si/mcp`, the endpoint foresight.agt advertises. It serves the signal database behind the published analysis at foresight.domains/insights, refreshed daily: `overview`, `search_signals`, `get_signal`, `list_drivers`, `get_driver`, `get_insights`, `list_scans`, `get_scan`.
+This plugin also connects the `foresight` MCP server at `https://fore.si/mcp`, the endpoint foresight.agt advertises. It serves the signal database behind the published analysis at foresight.domains/insights, refreshed daily: `overview`, `search_signals`, `get_signal`, `list_drivers`, `get_driver`, `get_insights`, `list_scans`, `get_scan`.
 
 - In signal-dependent modes, query it alongside the local signal store as extra evidence. Cite its signals by id and source, and label them as coming from the foresight.agt database.
-- It is read-only. Signals you gather still go into the local store under the Signal Persistence rules; copy a published signal locally only when you use it as evidence, keeping its original id in `notes`.
+- Signals you gather go into the local store under the Signal Persistence rules. Copy a published signal locally only when you use it as evidence, and keep its original id in `notes`.
 - If the server is unavailable, continue with the local store and web research; never block on it.
