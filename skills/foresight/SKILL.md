@@ -19,10 +19,9 @@ Compressed methodology lives in the `ref/` folder next to this SKILL.md (the ski
 **Path resolution rule (plugin install):** `ref/…` paths resolve against this skill's base directory. `signals/…` paths resolve against the *signal store*, which must be user-writable and survive plugin updates, so it never lives inside the plugin folder. Use the first that applies:
 
 1. A path named in the prompt, or the `FORESIGHT_SIGNALS_DIR` environment variable.
-2. `skill/signals/` when working inside the `foresight-md` repository (the autonomous pipeline always passes this path).
-3. `~/.claude/foresight/signals/` if it exists.
-4. `~/.claude/commands/foresight/signals/` if it exists (the pre-plugin install location; keep using it so no signals are orphaned).
-5. Otherwise create `~/.claude/foresight/signals/` and its `scans/` folder, copy `database.json`, `graph.json`, `insights.json` and `index.md` from `signals-template/` in this skill's base directory, and set today's date in their metadata.
+2. `~/.claude/foresight/signals/` if it exists.
+3. `~/.claude/commands/foresight/signals/` if it exists (the pre-plugin install location; keep using it so no signals are orphaned).
+4. Otherwise create `~/.claude/foresight/signals/` and its `scans/` folder, copy `database.json`, `graph.json`, `insights.json` and `index.md` from `signals-template/` in this skill's base directory, and set today's date in their metadata.
 
 Path mentions inside `ref/` files (such as `~/.claude/commands/foresight/…`) describe the legacy install; this rule overrides them.
 

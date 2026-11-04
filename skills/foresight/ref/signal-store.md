@@ -1,6 +1,6 @@
 # Signal Store — Persistent Signal Database Reference
 
-The signal store is a persistent, growing knowledge base at `~/.claude/commands/foresight/signals/` (installed) or `skill/signals/` inside the `foresight-md` repository — the repo copy is committed and is the source of truth for the autonomous pipeline in `pipeline/`. It accumulates signals across sessions, tracks their evolution over time, maps connections between them, and clusters them into drivers.
+The signal store is a persistent, growing knowledge base in the user's local signal folder. The SKILL.md path resolution rule picks the folder. It accumulates signals across sessions, tracks their evolution over time, maps connections between them, and clusters them into drivers.
 
 > **Pipeline note:** when running under `pipeline/AUTOPUBLISH.md`, do not hand-edit the JSON files. Write signals, drivers and connections through `node pipeline/run.js` (which calls `pipeline/lib/store.js`) so IDs, validation, `history`, `index.md` and the `scans/` snapshot stay consistent.
 
