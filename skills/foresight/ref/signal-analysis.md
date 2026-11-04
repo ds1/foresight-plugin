@@ -18,16 +18,37 @@ If the database has fewer than 5 signals, skip analysis — not enough data for 
 
 ---
 
-## Implementation Note — code vs. LLM (autonomous pipeline)
+## Implementation Note for the Published Signal Field
 
-The `pipeline/` in this repository runs part of this analysis deterministically so that scheduled, unattended runs are idempotent:
+The published signal field runs all seven passes in code on every change. The code lives in `pipeline/lib/cluster.js` in the foresight-md repository. The rules below are the ones it applies. A local /foresight run may still follow the judgement-based guidance in the pass sections that come after this note.
 
-- **Pass 1 (Cluster Detection) and Pass 7 (STEEP+V Gaps) are implemented in code** — `pipeline/lib/cluster.js`, invoked by `node pipeline/run.js analyze`. Code emits the schemas below with two deliberate deviations:
-  - **Stable IDs.** A cluster's `id` is `cluster-<first 8 hex of SHA-1 over its sorted member signal IDs>` rather than the date-sequence form. Reason: the same cluster must keep the same ID across daily re-runs so `status`, `note`, `proposed_driver` and the publication ledger survive. `date_detected` is still recorded. If a cluster's membership changes, it gets a new ID and the old entry is kept with `"status": "superseded"` and `"superseded_by": "<new-id>"`.
-  - **`proposed_driver` / `proposed_direction` start empty** (`null` / `""`). Naming a driver is a semantic judgement; the LLM fills these in during the run (or a human does during curation). Code never overwrites a non-empty value.
-- **Passes 2 (Convergence) and 4 (Contradiction) are produced by the LLM** after a scan, written into `insights.json` in the exact schemas below; `run.js analyze` validates the shape and preserves IDs and `status` across runs.
-- **Passes 3, 5 and 6 (Acceleration, Emergence, Decay) are deferred** until the database carries enough `history` to make them meaningful; code leaves those arrays untouched.
-- **"Already published" is tracked outside this file**, in `pipeline/ledger.json` (insight ID or topic slug → article slug, date, status). `insights.json` keeps its `status` vocabulary unchanged. When the pipeline publishes a cluster article it also sets that cluster's `status` to `confirmed`.
+Every pattern carries `type`, `id`, `rule`, `signals`, `date_detected`, and `status`. IDs are stable across runs, so `status` and notes carry forward by ID. A signal belongs to a driver when either side lists the other, by ID or by title. New signals never count as strength upgrades. Upgrades come only from `history` entries.
+
+| Rule | Fires when | ID |
+|---|---|---|
+| `cluster.tags`, `cluster.domain` | Three or more signals share two tags or a domain and no single driver covers them all | `cluster-` plus a hash of sorted members |
+| `conv.bridge` | Two active clusters with disjoint domains share a bridging signal or two tags | `conv-` plus a hash of the cluster IDs |
+| `conv.parallel` | A `parallel` connection joins signals with disjoint domains | `conv-` plus a hash of the pair |
+| `accel.upgrades` | A driver has two or more members upgraded within 180 days, or a domain has three | `accel-<scope>-<slug>` |
+| `accel.influx` | A driver older than 60 days gains three or more signals within 60 days | `accel-influx-<slug>` |
+| `contra.link` | A `contradicts` connection exists | `contra-` plus a hash of the pair |
+| `contra.direction` | Two signals on one driver or domain point to opposite ends of a fixed word pair | `contra-` plus a hash of the pair |
+| `emerg.new-domain` | A domain absent from the baseline reaches three signals | `emerg-new-domain-<slug>` |
+| `emerg.activation` | A domain with two or fewer baseline signals gains three within 60 days | `emerg-activation-<slug>` |
+| `emerg.threshold` | A cluster whose members were all early gains an emerging or stronger member | `emerg-threshold-<slug>` |
+| `decay.silent` | A driver's newest member is older than 365 days | `decay-silent-<slug>` |
+| `decay.downgrades` | Two or more members of a driver were downgraded | `decay-downgrades-<slug>` |
+| `decay.stale-evidence` | An active cluster or driver holds members older than 365 days | `decay-stale-evidence-<slug>` |
+| `decay.lost-members` | A superseded cluster's successor has fewer members | `decay-lost-members-<slug>` |
+| `gap.blind-spot`, `gap.underrepresented`, `gap.stale` | A STEEP+V category has no signals, under 10 percent, or only signals older than 180 days | `gap-<category>` |
+
+The contradiction word pairs are centralization and decentralization, growth and decline, open and closed, consolidation and fragmentation, regulation and deregulation, rising and falling, and human and automated. Only the "To" half of a direction counts.
+
+The emergence baseline holds counts per domain, tag, and driver, and the strongest stage per cluster. Each analysis compares against it and then rewrites it. An emergence drops 90 days after it was detected.
+
+Two cluster fields start empty. `proposed_driver` and `proposed_direction` need semantic judgement. A model or a person fills them in. Code never overwrites a value once set.
+
+Publication is tracked outside this file in `pipeline/ledger.json`. When the pipeline publishes a cluster article, it sets that cluster's `status` to `confirmed`.
 
 ---
 
